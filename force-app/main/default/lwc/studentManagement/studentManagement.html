@@ -1,0 +1,78 @@
+<template>
+ <lightning-card title="Student Management System" icon-name="standard:contact">
+
+        <div class="slds-p-around_medium">
+
+            <lightning-card title="Create Student">
+                <div class="slds-p-around_medium">
+
+                    <lightning-record-edit-form
+                        object-api-name="Student__c"
+                        onsuccess={handleCreateSuccess}>
+
+                        <lightning-messages></lightning-messages>
+
+                        <lightning-input-field field-name="Name"></lightning-input-field>
+                        <lightning-input-field field-name="Course__c"></lightning-input-field>
+                        <lightning-input-field field-name="Fees_paid__c"></lightning-input-field>
+                        <lightning-input-field field-name="Email__c"></lightning-input-field>
+                        <lightning-input-field field-name="Mobile__c"></lightning-input-field>
+
+                        <lightning-button
+                            type="submit"
+                            label="Create Student"
+                            variant="brand">
+                        </lightning-button>
+
+                    </lightning-record-edit-form>
+                </div>
+            </lightning-card>
+
+            <br/>
+
+            <lightning-input
+                type="search"
+                label="Search Student"
+                placeholder="Search by name or course"
+                onchange={handleSearch}>
+            </lightning-input>
+
+            <br/>
+
+            <lightning-datatable
+                key-field="Id"
+                data={displayRecords}
+                columns={columns}
+                onsort={handleSort}
+                sorted-by={sortedBy}
+                sorted-direction={sortedDirection}
+                onsave={handleSave}
+                onrowaction={handleRowAction}
+                draft-values={draftValues}>
+            </lightning-datatable>
+
+            <br/>
+
+            <div class="slds-align_absolute-center">
+
+                <lightning-button
+                    label="Previous"
+                    onclick={handlePrevious}
+                    disabled={isPreviousDisabled}>
+                </lightning-button>
+
+                <span class="slds-m-horizontal_medium">
+                    Page {page} of {totalPages}
+                </span>
+
+                <lightning-button
+                    label="Next"
+                    onclick={handleNext}
+                    disabled={isNextDisabled}>
+                </lightning-button>
+
+            </div>
+
+        </div>
+    </lightning-card>   
+</template>
